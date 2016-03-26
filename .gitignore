@@ -1,0 +1,12 @@
+#
+# Git ignore list
+# 2016-03-26
+
+# object files
+*.o
+
+# executable
+dividenumber
+
+# output files
+out*
