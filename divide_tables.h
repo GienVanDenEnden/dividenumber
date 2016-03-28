@@ -50,7 +50,7 @@ struct strNumber {
 };
 
 
-// result van n1 * n2 + n3 * n4 + n5
+// result from n1 * n2 + n3 * n4 + n5
 struct strMultiAddFour 
 {
    int_fast8_t n1 ;  
@@ -86,6 +86,6 @@ extern struct strMultiAddFour   glb_arrMulAdd[10][10][10][10]        ; // n1, n2
 extern struct strLastMulAddFour glb_arrNoLastMulAdd[10][10][10][10]  ; // number last digits waar 1=Digit, 2=overflow(n5) 3=N1, 4=N3
 
 
-void numberArrayFill(  void );  // Fill the static glb_arrNumber array
-void numberArrayPrint( void );  // Print the static glb_arrNumber too default output
+void numberArrayFill(  void );  // Fill the arrays
+void numberArrayPrint( void );  // Print the arrrays too default output
 

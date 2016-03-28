@@ -518,29 +518,27 @@ void numberWalkCalcStart( struct strDivideState *strState, struct strWalkState *
 // 
 void numberWalkNumItterative( struct strDivideState *strState )
 {
-   int_fast8_t            iDigit   ;
-   struct strWalkState   *oWalk    ;
-   struct strDivideState *strClone ;
-   int_fast8_t           *number1  ;
-   int_fast8_t           *number2  ;
-   int_fast8_t            iCnt     ;
-   
-   int_fast8_t           *OverflowWalk    ;
-
-   struct strMultiAddFour   *strFour;
+   int_fast8_t             iDigit       ;
+   struct strWalkState    *oWalk        ;
+   struct strDivideState  *strClone     ;
+   int_fast8_t            *number1      ;
+   int_fast8_t            *number2      ;
+   int_fast8_t             iCnt         ;
+   int_fast8_t            *OverflowWalk ;
+   struct strMultiAddFour *strFour      ;
    
    MAINBLOCK:
    while( strState->iCurNumber >= strState->iMinCurNr ) {
-      oWalk   = strState->arrWalk   + strState->iCurNumber ;
+      oWalk = strState->arrWalk + strState->iCurNumber ;
       
       // recalc values
       if ( oWalk->bCalc1 == 1 ) {   
          numberWalkCalcStart( strState, oWalk );
       }
 
-      if ( strState->iCurNumber > 0 /* && strState->iCurNumber < 0 */ ) {
+      if ( strState->iCurNumber > 0 ) {
       
-         while( oWalk->iLastWalk < oWalk->strLast->iCount /* strLast.iCount */ ) 
+         while( oWalk->iLastWalk < oWalk->strLast->iCount ) 
          {
             strFour = &( oWalk->strLast->strLast[ oWalk->iLastWalk ] );
             oWalk->iLastWalk++;
@@ -560,8 +558,8 @@ void numberWalkNumItterative( struct strDivideState *strState )
 
             for ( iCnt = 0; iCnt < strFour->iNrOverflow; iCnt++ ) {
                *OverflowWalk = strFour->iOverflow[ iCnt ];
-               OverflowWalk++ ;
-               oWalk->iOverflowPos++;
+                OverflowWalk++ ;
+                oWalk->iOverflowPos++;
             }
             
             if ( strState->iCurNumber == strState->iMaxCurNr ) {
@@ -601,7 +599,6 @@ void numberWalkNumItterative( struct strDivideState *strState )
          // walk number1
          while( oWalk->iWalk1 >= 0 ) {
             
-            // strState->iNumbers1[ strState->iCurNumber ] = oWalk->iWalk1 ;
             *number1 = oWalk->iWalk1 ;
             
             if ( oWalk->bCalc2 == 1 ) {
@@ -612,7 +609,6 @@ void numberWalkNumItterative( struct strDivideState *strState )
             // walk number2
             while( oWalk->iWalk2 >= 0 ) {
 
-               // strState->iNumbers2[ strState->iCurNumber ] = oWalk->iWalk2 ;
                *number2 = oWalk->iWalk2 ;
                
                // calculate the current digit 

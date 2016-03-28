@@ -5,8 +5,13 @@ Integer factorization with brute force methode
 
 Description
 -----------
+Commandline tool for integer factorization.
 
-Commandline tool for integer facorization with brute force methode.
+The result is saved in the file out_result.txt .
+
+By pressing 'S', the current state is saved and the program is ended.
+By using the option '--continue' the program resumed the saved state.
+
 
 Installation
 ------------
@@ -29,10 +34,10 @@ Examples
 --------
 ```
 .\dividenumber 12312343
-  By the first dividers found, stop searching
+  By the first numbers found, stop searching.
    
-.\dividenumber --findall 12312343
-   Find all the dividers
+.\dividenumber --findall 12345678901234567893
+   Find all the numbers.
 ```
 
 License

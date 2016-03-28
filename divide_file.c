@@ -32,7 +32,7 @@
 #include "divide_alloc.h"
 
 char glb_cFileState[  PATH_MAX ] = "out_state_%" SCNdFAST8 ".txt"  ; // file name too store state, for each thread 1 file
-char glb_cFileResult[ PATH_MAX ] = "out_result.txt" ; // all the found numbers will be stored here
+char glb_cFileResult[ PATH_MAX ] = "out_result.txt"                ; // all the found numbers will be stored here
 
 
 //........................................
@@ -101,7 +101,6 @@ int fileStateSave( char *filename, struct strDivideState *strState )
      fprintf( strFile, "iOverflowPos   : %" SCNdFAST8 "\n", strState->arrWalk[ iCnt ].iOverflowPos   );
 
      fprintf( strFile, "iLastWalk      : %" SCNdFAST8 "\n", strState->arrWalk[ iCnt ].iLastWalk   );
-//     fprintf( strFile, "iDigOver       : %" SCNdFAST8 "\n", strState->arrWalk[ iCnt ].iDigOver    );
      
      fprintf( strFile, "iWalk1         : %" SCNdFAST8 "\n", strState->arrWalk[ iCnt ].iWalk1         );
      fprintf( strFile, "iWalk2         : %" SCNdFAST8 "\n", strState->arrWalk[ iCnt ].iWalk2         );
@@ -115,7 +114,6 @@ int fileStateSave( char *filename, struct strDivideState *strState )
      }
    }
    
-//   struct strWalkState *arrWalk    ; // iCurNumber walk state
    fprintf( strFile, "[End]\n" );
 
    fclose( strFile );
@@ -257,7 +255,6 @@ struct strDivideState * fileStateLoad( char *filename )
          } else if ( strncmp( cLine, "iOverflowPos"   , 12 ) == 0 ) { sscanf( cLine, "%s : %" SCNdFAST8 , cDummy1, &oWalk->iOverflowPos   );   
 
          } else if ( strncmp( cLine, "iLastWalk"      ,  9 ) == 0 ) { sscanf( cLine, "%s : %" SCNdFAST8 , cDummy1, &oWalk->iLastWalk      );   
-//         } else if ( strncmp( cLine, "iDigOver"       ,  8 ) == 0 ) { sscanf( cLine, "%s : %" SCNdFAST8 , cDummy1, &oWalk->iDigOver       );   
             
          } else if ( strncmp( cLine, "iWalk1"         ,  6 ) == 0 ) { sscanf( cLine, "%s : %" SCNdFAST8 , cDummy1, &oWalk->iWalk1         );   
          } else if ( strncmp( cLine, "iWalk2"         ,  6 ) == 0 ) { sscanf( cLine, "%s : %" SCNdFAST8 , cDummy1, &oWalk->iWalk2         );   

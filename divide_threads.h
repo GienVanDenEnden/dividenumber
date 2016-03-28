@@ -45,8 +45,7 @@ void        threadClean ( void );                            // Clean all thread
 int_fast8_t threadStart( struct strDivideState *strState );  // Start a new thread
 void        threadEnd(   struct strDivideState *strState );  // Stop a new thread
 
-void        threadSaveState( void );                         // Wait loop too see if a thread is running
+void        threadWaitLoop(  void );                         // Wait loop too see if a thread is running
 
-void        threadWaitLoop(  void );                         // Save all threads and stop them
+void        threadSaveState( void );                         // Save all threads and stop them
 void        threadContinue(  void );                         // Continue threads (read files and start threads)
-

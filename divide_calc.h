@@ -28,7 +28,6 @@ struct strWalkState {
    int_fast8_t *OverflowDigits  ; // matrix, for each digit an array of overflow values
    
    int_fast8_t iLastWalk        ; // walk in last
-//   int_fast8_t iDigOver         ; // last digit with overflow
    
    int_fast8_t  iWalk1          ; // 9..0
    int_fast8_t  iWalk2          ; // 9..0

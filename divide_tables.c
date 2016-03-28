@@ -25,19 +25,18 @@
 
 #include "divide_tables.h"
 
-// 2 dimensional array of result of x * y 
-struct strNumber         glb_arrNumber[10][10]                ; // dimension 10 x 10 for all single digits
+struct strNumber         glb_arrNumber[10][10]                ; // dimension 10 x 10 for all single digits, multiple & adding
 struct strMultiAddFour   glb_arrMulAdd[10][10][10][10]        ; // n1, n2, n3, n4 = n1 * n2 + n3 * n4 = result
 struct strLastMulAddFour glb_arrNoLastMulAdd[10][10][10][10]  ; // number last digits waar 1=Digit, 2=overflow(n5) 3=N1, 4=N3
 
 // Number array functions:
 //
-// - numberArrayFill : Fill the static glb_arrNumber array
-// - numberArrayPrint: Print the static glb_arrNumber too default output
+// - numberArrayFill : Fill the arrays
+// - numberArrayPrint: Print the arrays too default output
 // ..........................................
 
 //
-// Fill the glb_arrNumber array
+// Fill the arrays
 //
 void numberArrayFill( void )
 {
@@ -122,9 +121,6 @@ void numberArrayFill( void )
                
                stMulAdd->iRstLast  = stAdd.iRstAddB1 ;
 
-// printf( "End digit: %d , count: %d\n", stMulAdd->iRstLast, glb_arrNoLastMulAdd[ stMulAdd->iRstLast ] );
-
-               
                if ( stNum1.iRstMulB2 > 0 ) {
                   stMulAdd->iOverflow[ stMulAdd->iNrOverflow ] = stNum1.iRstMulB2 ;
                   stMulAdd->iNrOverflow++ ;
@@ -151,47 +147,37 @@ void numberArrayFill( void )
                // collect end digits
               for( iN5 = 0; iN5 < 10; iN5++ ) {
 
-               stMulAddOVer = *stMulAdd ;
-               stMulAddOVer.n5 = iN5 ;
+                 stMulAddOVer = *stMulAdd ;
+                 stMulAddOVer.n5 = iN5 ;
                
-               stAdd  = glb_arrNumber[ stMulAdd->iRstLast ][ stMulAddOVer.n5 ];
+                 stAdd  = glb_arrNumber[ stMulAdd->iRstLast ][ stMulAddOVer.n5 ];
 
-               stMulAddOVer.iRstLast = stAdd.iRstAddB1 ;
-               if ( stAdd.iRstAddB2 > 0 ) {
-                  if ( stMulAddOVer.iNrOverflow == 0 ) {
-                     stMulAddOVer.iOverflow[ stMulAddOVer.iNrOverflow ] = stAdd.iRstAddB2 ;
-                     stMulAddOVer.iNrOverflow++ ;
-                  } else {
-                     if ( stMulAddOVer.iOverflow[ stMulAddOVer.iNrOverflow - 1 ] < 9 ) {
-                        stMulAddOVer.iOverflow[ stMulAddOVer.iNrOverflow - 1 ]++ ;
-                     } else {
-                        stMulAddOVer.iOverflow[ stMulAddOVer.iNrOverflow ] = stAdd.iRstAddB2 ;
-                        stMulAddOVer.iNrOverflow++ ;
-                     }
-                  }
-               }
-               
-               glb_arrNoLastMulAdd[ stMulAddOVer.iRstLast ][ iN5 ][ iN1 ][ iN3 ].strLast[ glb_arrNoLastMulAdd[ stMulAddOVer.iRstLast ][ iN5 ][ iN1 ][ iN3 ].iCount ] = stMulAddOVer ;
-               glb_arrNoLastMulAdd[ stMulAddOVer.iRstLast ][ iN5 ][ iN1 ][ iN3 ].iCount++ ;
+                 stMulAddOVer.iRstLast = stAdd.iRstAddB1 ;
+                 if ( stAdd.iRstAddB2 > 0 ) {
+                    if ( stMulAddOVer.iNrOverflow == 0 ) {
+                       stMulAddOVer.iOverflow[ stMulAddOVer.iNrOverflow ] = stAdd.iRstAddB2 ;
+                       stMulAddOVer.iNrOverflow++ ;
+                    } else {
+                       if ( stMulAddOVer.iOverflow[ stMulAddOVer.iNrOverflow - 1 ] < 9 ) {
+                          stMulAddOVer.iOverflow[ stMulAddOVer.iNrOverflow - 1 ]++ ;
+                       } else {
+                          stMulAddOVer.iOverflow[ stMulAddOVer.iNrOverflow ] = stAdd.iRstAddB2 ;
+                          stMulAddOVer.iNrOverflow++ ;
+                       }
+                    }
+                 }
+                  
+                 glb_arrNoLastMulAdd[ stMulAddOVer.iRstLast ][ iN5 ][ iN1 ][ iN3 ].strLast[ glb_arrNoLastMulAdd[ stMulAddOVer.iRstLast ][ iN5 ][ iN1 ][ iN3 ].iCount ] = stMulAddOVer ;
+                 glb_arrNoLastMulAdd[ stMulAddOVer.iRstLast ][ iN5 ][ iN1 ][ iN3 ].iCount++ ;
               }
             }
          }
       }
    }
-/*
-   for( iN1 = 0; iN1 < 10; iN1++ ) {
-      for( iN2 = 0; iN2 < 10; iN2++ ) {
-         for( iN3 = 0; iN3 < 10; iN3++ ) {
-            printf( "End digits from %d, n1:%d, n2: %d, count %d\n", iN1, iN2, iN3, glb_arrNoLastMulAdd[ iN1 ][ iN2 ][ iN3 ].iCount );
-            
-         }
-      }
-   }
-*/   
 }
 
 //
-// print number array too default output
+// print number arrays too default output
 //
 void numberArrayPrint( void )
 {
@@ -278,7 +264,7 @@ void numberArrayPrint( void )
          for( iN3 = 0; iN3 < 10; iN3++ ) {
             for( iN4 = 0; iN4 < 10; iN4++ ) {
                stFour = &( glb_arrNoLastMulAdd[ iN1 ][ iN2 ][ iN3 ][iN4 ] ) ;
-               printf( "Digit: %d, OVerflow: %d, n1: %d, n3: %d, count: %d\n", iN1, iN2, iN3, iN4, stFour->iCount );
+               printf( "Digit: %d, Overflow: %d, n1: %d, n3: %d, count: %d\n", iN1, iN2, iN3, iN4, stFour->iCount );
                for( iN5 = 0; iN5 < stFour->iCount; iN5++ ) {
 
                   stMulAdd = &( stFour->strLast[ iN5 ] ) ;

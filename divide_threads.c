@@ -36,16 +36,17 @@
 
 
 // display
-int              glb_iDispThreadState       = 1 ; // display thread status
+          int              glb_iDispThreadState = 1    ; // display thread status
 
 // thread data
-         int_fast8_t       glb_iThreadMax   = -1   ; // max number of threads, -1 = auto detect
-volatile int_fast8_t       glb_iThreadFree  = 0    ; // number of threads free, indicator, not 100% correct by threads, start & end threads use mutex
-         struct strThread *glb_arrThreads   = NULL ; // thread data
-volatile int_fast8_t       glb_iThreadStop  = 0    ; // 1 too stop all the threads
+         int_fast8_t       glb_iThreadMax       = -1   ; // max number of threads, -1 = auto detect
+volatile int_fast8_t       glb_iThreadFree      = 0    ; // number of threads free, indicator, not 100% correct by threads, start & end threads use mutex
+         struct strThread *glb_arrThreads       = NULL ; // thread data
+volatile int_fast8_t       glb_iThreadStop      = 0    ; // 1 too stop all the threads
 
-pthread_mutex_t   glb_mutex_threadstart   ; // thread start/stop 
-pthread_mutex_t   glb_mutex_resultfile    ; // locking too write in the result file
+
+         pthread_mutex_t   glb_mutex_threadstart       ; // thread start/stop 
+         pthread_mutex_t   glb_mutex_resultfile        ; // locking too write in the result file
 
 
 
@@ -55,6 +56,7 @@ pthread_mutex_t   glb_mutex_resultfile    ; // locking too write in the result f
 // - threadClean           : Clean all threads
 // - threadStart           : Start a new thread
 // - threadEnd             : Stop a new thread
+//
 // - threadWaitLoop        : Wait loop too see if a thread is running
 //
 // - threadSaveState       : Save all threads and stop them
@@ -114,7 +116,7 @@ void threadInit( void )
    
    struct sigaction new_action ;
 
-   // setup signal handling, use SIGUSR1 too reach the threads
+   // setup signal handling, use SIGUSR1 & SIGUSR2 too reach the threads
                   new_action.sa_handler = thread_signal_handler;
    sigemptyset ( &new_action.sa_mask );
                   new_action.sa_flags   = 0;
@@ -193,7 +195,7 @@ void threadClean ( void )
    // unlock threadstart   
    pthread_mutex_unlock( &glb_mutex_threadstart );
    
-   // clean mutex
+   // destroy mutex
    pthread_mutex_destroy( &glb_mutex_threadstart );
    pthread_mutex_destroy( &glb_mutex_resultfile  );
 }

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>. 
  
-    8 CPU's (--findall)
+    8 CPU's (Intel core I7) (--findall)
     14 digits =     1s (real   0m01)
     15 digits =     9s (real   0m09)
     16 digits =     3s (real   0m09)
@@ -49,8 +49,8 @@
 
 
 // version info
-static char glb_cVersion[] = "0.0.1"     ; // current version
-// static char cVerDate[] = "2016-03-07"; // yyyy-mm-dd
+static char glb_cVersion[] = "0.0.2"     ; // current version
+// static char cVerDate[] = "2016-03-26"; // yyyy-mm-dd
 
 
 
@@ -106,7 +106,9 @@ void printHelp()
 void printVersion()
 {
    printf( "\n" );
-   printf( "dividenumber\nversion: %s\n", glb_cVersion );
+   printf( "Program    : dividenumber\n" );
+   printf( "Version    : %s\n", glb_cVersion );
+   printf( "Description: Integer factorization with brute force methode\n" );
    printf( "\n" );
   
    printf( "Copyright (C) 2016 Gien van den Enden\n");
@@ -159,12 +161,10 @@ int main( int argc, char *argv[] ) {
             exit( 1 ) ;
          }
          
-         
      } else if ( strcmp( argv[ iCntArgv ], "--printnumberarray" ) == 0 ) {
          // print number array, 
          numberArrayPrint();
          exit(0);
-
          
      } else if ( strcmp( argv[ iCntArgv ], "--continue" ) == 0 ) {
         iContinue = 1; 
@@ -218,8 +218,8 @@ int main( int argc, char *argv[] ) {
    threadClean(); 
    
    if ( glb_iDispThreadState == 1 ) {
-      printf( "The result(s) are set in file: %s\n", glb_cFileResult );
-      printf( "Program end\n" );
+      printf( "The result(s) are saved in file: %s\n", glb_cFileResult );
+      printf( "Program end.\n" );
    }
    
    // the end

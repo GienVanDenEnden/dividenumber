@@ -25,4 +25,4 @@ extern int_fast8_t   glb_iDigitsMax  ;      // max number of digits allowed
 
 
 int_fast8_t numberCheck( char *cNumber ) ;  // Check of given string only contain digits
-int getkey( void ) ;                        // check keyboard (nowait)
+int         getkey(      void          ) ;  // check keyboard (nowait)
